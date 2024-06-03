@@ -1,10 +1,19 @@
 # Music website
+
+## Table of contents
+* [Project structure](#project-structure)
+* [System requirements](#system-requirements)
+* [Database structure](#database-structure)
+* [API References](#api-references)
+
+<a name="project-structure"></a>
 ## Project structure
 ```plaintext
 ├── frontend (interface for website)
 ├── main-server: express.js (main server)
 └── ml-server: flask (process data using machine learning)
 ```
+<a name="system-requirements"></a>
 ## System requirements
 Requirements to run Project
 - **Node.js 18.x**
@@ -13,6 +22,7 @@ Requirements to run Project
 - **pip**
 - **mysql**
 
+<a name="database-structure"></a>
 ## Database structure
 #### Users table
 |Column|Data type|Allow null|Description|
@@ -116,8 +126,8 @@ cd ml-server
 python app.py
 ```
 
-
-## API reference
+<a name="api-references"></a>
+## API references
 #### Auth
 Login
 ```http
@@ -224,6 +234,22 @@ Response
         "page": current_page,
         "page_size": songs_per_page,
         "total_page": number_of_pages
+    }
+```
+Get recommended songs for specific user
+```http
+GET /songs/for-you
+```
+```javascript
+Request
+    headers: {
+        "authorization": "Bearer {user_access_token}"
+    }
+Response
+    body: {
+        song1,
+        song2,
+        ...
     }
 ```
 Get song by id
