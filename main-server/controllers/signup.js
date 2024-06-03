@@ -20,15 +20,16 @@ const userSignupController = asyncHandler(async (req, res) => {
     /**
      * insert new records into users table
      */
-    await User.create({
+    const user = User.build({
         username,
         password,
         fullname,
         email,
         role,
     });
+    await user.save();
 
-    const user = await User.findOne({
+    const userInfo = await User.findOne({
         where: { username },
         attributes: ['id', 'username', 'role'],
     });
