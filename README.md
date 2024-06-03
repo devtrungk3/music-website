@@ -4,7 +4,25 @@
 * [Project structure](#project-structure)
 * [System requirements](#system-requirements)
 * [Database structure](#database-structure)
+    * [Users table](#users-table)
+    * [Songs table](#songs-table)
+    * [Artist table](#artists-table)
+    * [Genre table](#genres-table)
+    * [Playlists table](#playlists-table)
+    * [Songs_artists table](#songs-artists-table)
+    * [Songs_genres table](#songs-genres-table)
+    * [Favorites table](#favorites-table)
+    * [Play_history table](#play-history-table)
+    * [Playlists_songs table](#playlists-songs-table)
 * [API References](#api-references)
+    * [Auth](#api-auth)
+    * [User](#api-user)
+    * [Song](#api-song)
+    * [Artist](#api-artist)
+    * [Genre](#api-genre)
+    * [Favorite](#api-favorite)
+    * [Playlist](#api-playlist)
+    * [Play history](#api-history)
 
 <a name="project-structure"></a>
 ## Project structure
@@ -24,6 +42,7 @@ Requirements to run Project
 
 <a name="database-structure"></a>
 ## Database structure
+<a name="users-table"></a>
 #### Users table
 |Column|Data type|Allow null|Description|
 |-|-|-|-|
@@ -36,6 +55,7 @@ Requirements to run Project
 |createdAt|Timestamp|No||
 |updatedAt|Timestamp|Yes||
 
+<a name="songs-table"></a>
 #### Songs table
 |Column|Data type|Allow null|Description|
 |-|-|-|-|
@@ -55,6 +75,7 @@ Requirements to run Project
 |liveness|Float|Yes|Presence of live performance elements|
 |valence|Float|Yes|Positivity of the song|
 
+<a name="artists-table"></a>
 #### Artists table
 |Column|Data type|Allow null|Description|
 |-|-|-|-|
@@ -63,12 +84,14 @@ Requirements to run Project
 |nationality|String|No||
 |image|String|Yes|Path to image file of artist|
 
+<a name="genres-table"></a>
 #### Genres table
 |Column|Data type|Allow null|Description|
 |-|-|-|-|
 |id|Integer|No|Primary key, auto increment|
 |title|String|No||
 
+<a name="playlists-table"></a>
 #### Playlists table
 |Column|Data type|Allow null|Description|
 |-|-|-|-|
@@ -77,18 +100,21 @@ Requirements to run Project
 |description|String|Yes||
 |userId|Integer|No|Foreign key references to Users(id)|
 
+<a name="songs-artists-table"></a>
 #### Songs_artists table (Songs - many to many - Artists)
 |Column|Data type|Allow null|Description|
 |-|-|-|-|
 |songId|Integer|No|Primary key, foreign key references to Songs(id)|
 |artistId|Integer|No|Primary key, foreign key references to Artists(id)|
 
+<a name="songs-genres-table"></a>
 #### Songs_genres table (Songs - many to many - Genres)
 |Column|Data type|Allow null|Description|
 |-|-|-|-|
 |songId|Integer|No|Primary key, foreign key references to Songs(id)|
 |genreId|Integer|No|Primary key, foreign key references to Genres(id)|
 
+<a name="favorites-table"></a>
 #### Favorites table (Users - many to many - Songs)
 |Column|Data type|Allow null|Description|
 |-|-|-|-|
@@ -97,6 +123,7 @@ Requirements to run Project
 |createdAt|Timestamp|No||
 |updatedAt|Timestamp|Yes||
 
+<a name="play-history-table"></a>
 #### Play_history table (Users - many to many - Songs)
 |Column|Data type|Allow null|Description|
 |-|-|-|-|
@@ -106,6 +133,7 @@ Requirements to run Project
 |createdAt|Timestamp|No||
 |updatedAt|Timestamp|Yes||
 
+<a name="playlists-songs-table"></a>
 #### Playlists_songs table (Users - many to many - Songs)
 |Column|Data type|Allow null|Description|
 |-|-|-|-|
@@ -128,6 +156,7 @@ python app.py
 
 <a name="api-references"></a>
 ## API references
+<a name="api-auth"></a>
 #### Auth
 Login
 ```http
@@ -183,6 +212,7 @@ Response
         "accessToken": user_access_token,
     }
 ```
+<a name="api-user"></a>
 #### User
 Get user information
 ```http
@@ -218,6 +248,7 @@ Response
         "success": message
     }
 ```
+<a name="api-song"></a>
 #### Song
 Get all songs
 ```http
@@ -280,6 +311,7 @@ Get songs by title
 ```http
 GET /songs?title={title}
 ```
+<a name="api-artist"></a>
 #### Artist
 Get all artists
 ```http
@@ -315,7 +347,8 @@ Response
         "total_page": number_of_pages
     }
 ```
-#### Genres
+<a name="api-genre"></a>
+#### Genre
 Get all genres
 ```http
 GET /genres
@@ -336,6 +369,7 @@ Get songs belongs to genre
 ```http
 GET /genres/{id}/songs
 ```
+<a name="api-favorite"></a>
 #### Favorite
 Get all songs in favorite list
 ```http
@@ -363,6 +397,7 @@ Remove song from favorite list
 ```http
 DELETE /favoriates/{songId}
 ```
+<a name="api-playlist"></a>
 #### Playlist
 Get all playlists of user
 ```http
@@ -438,6 +473,7 @@ Request
         "songId": songId
     }
 ```
+<a name="api-history"></a>
 #### Play history
 Get history
 ```http
