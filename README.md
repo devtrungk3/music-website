@@ -14,6 +14,7 @@
     * [Favorites table](#favorites-table)
     * [Play_history table](#play-history-table)
     * [Playlists_songs table](#playlists-songs-table)
+* [Starting the project](#starting-project)
 * [API References](#api-references)
     * [Auth](#api-auth)
     * [User](#api-user)
@@ -142,6 +143,7 @@ Requirements to run Project
 |createdAt|Timestamp|No||
 |updatedAt|Timestamp|Yes||
 
+<a name="starting-project"></a>
 ## Starting the project
 #### Run main server (express.js) - `http://localhost:3000`
 ```javascript
