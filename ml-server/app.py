@@ -21,7 +21,7 @@ except mysql.connector.Error as err:
     
 @app.route('/for-you/<int:userId>', methods=['GET'])
 def forYou(userId):
-    query = "SELECT * FROM songs"
+    query = "SELECT s.*, sa.artistId FROM songs AS s JOIN songs_artists AS sa on s.id = sa.songId"
     cursor.execute(query)
     data = cursor.fetchall()
     attributes = [i[0] for i in cursor.description]
