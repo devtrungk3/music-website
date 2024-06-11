@@ -52,7 +52,54 @@ def forYou(userId):
     # Find similar songs
     similar_songs = find_similar_songs(songId, songs, attributes, top_n=10)
     return jsonify({'songs': similar_songs})
+
+def get_user_recommendations(userId, user_item_matrix, user_similarity_df, num_recommendations=10):
+    # Get the similarity scores for the given user
+    user_similarities = user_similarity_df.loc[userId]
+
+    # Exclude the given user from their own similarity scores
+    user_similarities = user_similarities.drop(userId)
+
+    # Get the indices of the most similar users
+    similar_user_indices = user_similarities.nlargest(num_recommendations).index
+
+    # Get the songs played by the similar users
+    similar_users_songs = user_item_matrix.loc[similar_user_indices]
+
+    # Compute the weighted sum of play counts for each song
+    song_recommendation_scores = similar_users_songs.T.dot(user_similarities.loc[similar_user_indices])
     
+    # Normalize the scores by the sum of the similarity scores
+    song_recommendation_scores = song_recommendation_scores / user_similarities.loc[similar_user_indices].sum()
+
+    # Sort the songs by recommendation score
+    recommended_songs = song_recommendation_scores.sort_values(ascending=False)
+
+    # Exclude songs already played by the user
+    user_played_songs = user_item_matrix.loc[userId]
+    recommended_songs = recommended_songs.drop(user_played_songs[user_played_songs > 0].index, errors='ignore')
+
+    # Return the top recommendations
+    return recommended_songs.head(num_recommendations)
+
+@app.route('/maybe-like/<int:userId>', methods=['GET'])
+def maybeLike(userId):
+    query = "SELECT userId, songId, playCount FROM play_history"
+    cursor.execute(query)
+    data = cursor.fetchall()
+    attributes = [i[0] for i in cursor.description]
+    history_df = pd.DataFrame(data, columns=attributes)
+    
+    # Create user-song matrix
+    user_item_matrix = history_df.pivot(index='userId', columns='songId', values='playCount').fillna(0)
+
+    # Compute cosine similarity between users
+    user_similarity = cosine_similarity(user_item_matrix)
+
+    user_similarity_df = pd.DataFrame(user_similarity, index=user_item_matrix.index, columns=user_item_matrix.index)
+    
+    recommendations = get_user_recommendations(userId, user_item_matrix, user_similarity_df)
+    return jsonify({'songs': recommendations.index.tolist()})
 
 @app.route('/helloworld', methods=['GET'])
 def home():

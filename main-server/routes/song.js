@@ -5,6 +5,7 @@ const songController = require('../controllers/song');
 
 router.get('/', songController.getSongs);
 router.get('/for-you', verifyJWT, songController.getSongsForYou)
+router.get('/maybe-like', verifyJWT, songController.getSongsMaybeLike)
 router.get('/:id', songController.getSongById);
 
 module.exports = router;
