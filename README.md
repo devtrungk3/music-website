@@ -273,6 +273,9 @@ Get recommended songs for specific user
 ```http
 GET /songs/for-you
 ```
+```http
+GET /songs/maybe-like
+```
 ```javascript
 Request
     headers: {
