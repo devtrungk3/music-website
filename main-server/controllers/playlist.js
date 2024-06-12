@@ -52,7 +52,7 @@ exports.getPlaylistSongById = asyncHandler(async (req, res) => {
     if (!playlist) return res.json(null);
 
     const songsData = await Song.findAll({
-        attributes: ['id', 'title', 'image'],
+        attributes: ['id', 'title', 'image', 'audio'],
         include: {
             model: PlaylistSong,
             attributes: [],
