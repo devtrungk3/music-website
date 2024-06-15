@@ -65,13 +65,13 @@ exports.getUsers = asyncHandler(async (req, res) => {
  * user statistic by create time
  */
 exports.userStatistics = asyncHandler(async (req, res) => {
-    if (!req.body.year) return res.status(400).json({ error: 'Year has not been provided!'});
+    const year = parseInt(req.query.year) || 1;
     const data = await User.findAll({
         attributes: [
             [sequelize.fn('MONTH', sequelize.col('createdAt')), 'month'],
             [sequelize.fn('COUNT', sequelize.col('id')), 'total_users']
         ],
-        where: sequelize.where(sequelize.fn('year', sequelize.col('createdAt')), req.body.year),
+        where: sequelize.where(sequelize.fn('year', sequelize.col('createdAt')), year),
         group: [sequelize.fn('MONTH', sequelize.col('createdAt'))],
     });
     const months = [1,2,3,4,5,6,7,8,9,10,11,12];
