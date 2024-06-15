@@ -6,6 +6,7 @@ const { checkRole } = require('../middlewares/checkRole');
 const loginRouter = require('./login');
 const signupRouter = require('./signup');
 const userRouter = require('./user');
+const adminRouter = require('./admin');
 const refreshRouter = require('./refresh');
 const artistRouter = require('./artist');
 const genreRouter = require('./genre');
@@ -19,6 +20,7 @@ router.get('/helloworld', (req, res) => {
 });
 
 router.use('/auth', loginRouter, signupRouter, refreshRouter);
+router.use('/admin', verifyJWT, checkRole(['ADMIN']), adminRouter);
 router.use('/users', verifyJWT, checkRole(['USER']),  userRouter);
 router.use('/artists', artistRouter);
 router.use('/genres', genreRouter);
