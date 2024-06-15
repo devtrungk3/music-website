@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { verifyJWT } = require('../middlewares/jwtVerification');
+const { checkRole } = require('../middlewares/checkRole');
 const loginRouter = require('./login');
 const signupRouter = require('./signup');
 const userRouter = require('./user');
@@ -17,13 +19,13 @@ router.get('/helloworld', (req, res) => {
 });
 
 router.use('/auth', loginRouter, signupRouter, refreshRouter);
-router.use('/users', userRouter);
+router.use('/users', verifyJWT, checkRole(['USER']),  userRouter);
 router.use('/artists', artistRouter);
 router.use('/genres', genreRouter);
 router.use('/songs', songRouter);
-router.use('/favorites', favoriteRouter);
-router.use('/playlists', playlistRouter);
-router.use('/history', playHistoryRouter);
+router.use('/favorites', verifyJWT, checkRole(['USER']), favoriteRouter);
+router.use('/playlists', verifyJWT, checkRole(['USER']), playlistRouter);
+router.use('/history', verifyJWT, checkRole(['USER']), playHistoryRouter);
 
 router.use(function(err, req, res, next) {
     console.log(err);
