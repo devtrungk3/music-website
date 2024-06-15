@@ -17,6 +17,7 @@
 * [Starting the project](#starting-project)
 * [API References](#api-references)
     * [Auth](#api-auth)
+	* [Admin](#api-admin)
     * [User](#api-user)
     * [Song](#api-song)
     * [Artist](#api-artist)
@@ -213,6 +214,65 @@ Response
     body: {
         "accessToken": user_access_token,
     }
+```
+<a name="api-admin"></a>
+#### Admin
+Get data statistics
+```http
+GET /admin/statistics
+```
+```javascript
+Request
+    headers: {
+        "authorization": "Bearer {user_access_token}"
+    }
+Response
+    body: {
+        "total_users": number,
+        "total_admins": number,
+        "total_songs": number,
+        "total_artists": number,
+        "total_genres": number,
+        "total_playlists": number,
+        "total_listens": number,
+    }
+```
+Get all users
+```http
+GET /admin/users
+```
+```javascript
+Request
+    headers: {
+        "authorization": "Bearer {user_access_token}"
+    }
+Response
+    body: {
+		"users": [
+			user: {id, username, fullname, email, createdAt},
+			...
+		],
+        "page": current_page,
+        "page_size": songs_per_page,
+        "total_page": number_of_pages
+    }
+```
+Get user statistics by create time
+```http
+GET /admin/users-statistics?year={year}
+```
+```javascript
+Request
+    headers: {
+        "authorization": "Bearer {user_access_token}"
+    }
+Response
+    body: [
+		{ "month": 1, "total_users": number},
+		{ "month": 2, "total_users": number},
+		...
+		{ "month": 12, "total_users": number},
+	]
 ```
 <a name="api-user"></a>
 #### User
@@ -497,6 +557,9 @@ Response
     ]
 ```
 Add song into history
+```http
+POST /history
+```
 ```javascript
 Request
     headers: {
