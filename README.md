@@ -259,7 +259,7 @@ Response
 ```
 Get user statistics by create time
 ```http
-GET /admin/users-statistics?year={year}
+GET /admin/user-statistics?year={year}
 ```
 ```javascript
 Request
