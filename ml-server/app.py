@@ -3,37 +3,33 @@ from flask_cors import CORS
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics.pairwise import cosine_similarity
-import mysql.connector, pandas as pd
+import pandas as pd
+from sqlalchemy import create_engine
 
+engine = create_engine('mysql+mysqlconnector://root:@localhost/music_server')
 app = Flask(__name__)
 CORS(app, origins=['http://localhost:3000'])
 
-# mysql connector
-try:
-    connection = mysql.connector.connect(
-        host="localhost", 
-        database="music_server", 
-        user="root", password="")
-    cursor = connection.cursor()
-except mysql.connector.Error as err:
-    print("Error connecting to database:", err)
-    exit()
     
 @app.route('/for-you/<int:userId>', methods=['GET'])
 def forYou(userId):
     query = "SELECT s.*, sa.artistId FROM songs AS s JOIN songs_artists AS sa on s.id = sa.songId"
-    cursor.execute(query)
-    data = cursor.fetchall()
-    attributes = [i[0] for i in cursor.description]
-    songs = pd.DataFrame(data, columns=attributes)
-    songs = songs.select_dtypes(exclude=['object'])
-    attributes = songs.columns.tolist()[1:]
+    songs_df = pd.read_sql(query, engine)
+    attributes = songs_df.columns
+    songs_df = songs_df.select_dtypes(exclude=['object'])
+    attributes = songs_df.columns.tolist()[1:]
     scaler = StandardScaler()
-    songs[attributes] = scaler.fit_transform(songs[attributes])
+    songs_df[attributes] = scaler.fit_transform(songs_df[attributes])
     
-    query = "SELECT songId FROM play_history WHERE userId = %s ORDER BY playCount desc limit 1"
-    cursor.execute(query, (userId,))
-    songId = cursor.fetchone()[0]
+    query = f"SELECT songId FROM play_history WHERE userId = '{userId}' ORDER BY playCount desc limit 1"
+    df = pd.read_sql(query, engine)
+    songId = 1  
+    if not df.empty:
+        songId = df['songId'].iloc[0]
+    else:
+        query = f"SELECT songId, SUM(playCount) AS playCount FROM play_history GROUP BY songId ORDER BY playCount DESC;"
+        df = pd.read_sql(query, engine)
+        songId = df['songId'].iloc[0]
 
     def find_similar_songs(song_id, df, features, top_n=10):
         # Get the features of the given song
@@ -50,7 +46,7 @@ def forYou(userId):
         return similar_songs['id'].values.tolist()
 
     # Find similar songs
-    similar_songs = find_similar_songs(songId, songs, attributes, top_n=10)
+    similar_songs = find_similar_songs(songId, songs_df, attributes, top_n=10)
     return jsonify({'songs': similar_songs})
 
 def get_user_recommendations(userId, user_item_matrix, user_similarity_df, num_recommendations=10):
@@ -85,10 +81,7 @@ def get_user_recommendations(userId, user_item_matrix, user_similarity_df, num_r
 @app.route('/maybe-like/<int:userId>', methods=['GET'])
 def maybeLike(userId):
     query = "SELECT userId, songId, playCount FROM play_history"
-    cursor.execute(query)
-    data = cursor.fetchall()
-    attributes = [i[0] for i in cursor.description]
-    history_df = pd.DataFrame(data, columns=attributes)
+    history_df = pd.read_sql(query, engine)
     
     # Create user-song matrix
     user_item_matrix = history_df.pivot(index='userId', columns='songId', values='playCount').fillna(0)
@@ -104,6 +97,7 @@ def maybeLike(userId):
 @app.route('/helloworld', methods=['GET'])
 def home():
     return 'hello world'
+    
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5000, debug=True, threaded=True)
