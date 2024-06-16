@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const jwtUtil = require('../utils/jwt');
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 
 const userSignupController = asyncHandler(async (req, res) => {
     const { username, password, fullname, email } = req.body;
@@ -20,9 +21,10 @@ const userSignupController = asyncHandler(async (req, res) => {
     /**
      * insert new records into users table
      */
+    const hashedPassword = await bcrypt.hash(password, 10);
     const user = User.build({
         username,
-        password,
+        hashedPassword,
         fullname,
         email,
         role,

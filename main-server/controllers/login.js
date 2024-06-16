@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
 const jwtUtil = require('../utils/jwt');
+const bcrypt = require('bcrypt');
 
 const userLoginController = asyncHandler(async (req, res) => {
     const {username, password} = req.body;
@@ -8,16 +9,18 @@ const userLoginController = asyncHandler(async (req, res) => {
      * get user information from database
      */
     const user = await User.findOne({
-        where: { username, password },
-        attributes: ['id', 'username', 'role'],
+        where: { username },
+        attributes: ['id', 'username', 'password', 'role'],
     });
     /**
      * check wrong credentials
      */
     if (!user) 
-        return res.status(401).json({
-            error: 'username or password is wrong!'
-        });
+        return res.status(401).json({ error: 'username or password is wrong!' });
+    else {
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) return res.status(401).json({ error: 'username or password is wrong!' });
+    }
     /**
      * create new access and refresh token using credentials
      */
