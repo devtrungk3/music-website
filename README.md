@@ -310,6 +310,25 @@ Response
         "success": message
     }
 ```
+Get recommended songs for specific user
+```http
+GET /users/for-you
+```
+```http
+GET /users/maybe-like
+```
+```javascript
+Request
+    headers: {
+        "authorization": "Bearer {user_access_token}"
+    }
+Response
+    body: {
+        song1,
+        song2,
+        ...
+    }
+```
 <a name="api-song"></a>
 #### Song
 Get all songs
@@ -327,25 +346,6 @@ Response
         "page": current_page,
         "page_size": songs_per_page,
         "total_page": number_of_pages
-    }
-```
-Get recommended songs for specific user
-```http
-GET /songs/for-you
-```
-```http
-GET /songs/maybe-like
-```
-```javascript
-Request
-    headers: {
-        "authorization": "Bearer {user_access_token}"
-    }
-Response
-    body: {
-        song1,
-        song2,
-        ...
     }
 ```
 Get song by id
