@@ -8,7 +8,7 @@ const generateAccessToken = (payload) => {
         {...payload},
         process.env.SECRET_ACCESS_KEY,
         {
-            expiresIn: '1h',
+            expiresIn: '30m',
         }
     );
 }
