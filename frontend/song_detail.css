@@ -1,0 +1,63 @@
+.song_detail_container {
+    width: 100%;
+    height: auto;
+    /* border: 1px solid #fff; */
+}
+
+.song_detail_container .song_detail {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.song_detail_container .song_detail img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.song_detail_container .song_detail .song_info {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.song_detail_container .song_detail .song_info h1 {
+    text-transform: capitalize;
+    font-size: 40px;
+    font-weight: 800;
+}
+
+.song_detail_container .song_detail .song_info .subtitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.song_detail_container .song_detail .song_info .subtitle img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.song_detail_container .song_detail .song_info .song_icons {
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+}
+
+.song_detail_container .song_detail .song_info .song_icons .bi:first-child {
+    font-size: 60px;
+}
+
+.song_detail_container .song_detail .song_info .song_icons .bi {
+    margin-right: 30px;
+    cursor: pointer;
+}
+.subtitle p:not(:last-child) {
+    margin-right: 30px; /* Khoảng cách 10px giữa các phần tử, ngoại trừ phần tử cuối cùng */
+}
+

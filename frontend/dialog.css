@@ -1,0 +1,174 @@
+ /* ----------------------------Dialog add to playlist------------------- */
+
+ .dialog {
+    display: none;
+    position: fixed;
+    z-index: 111;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.dialog-content {
+    background-color: rgba(0, 0, 0, 0.8);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 20%;
+    text-align: center;
+    color: #fff;
+}
+
+.dialog .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dialog .checkbox .button {
+    display: flex;
+    justify-content: center;
+}
+
+.dialog .checkbox form {
+    font-size: 20px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.dialog .checkbox form .checkboxPlaylist {
+    scale: 2;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+.dialog .checkbox form .addToPlaylistBtn {
+    width: 130px;
+    height: 30px;
+    border: 2px solid #36e2ec;
+    outline: none;
+    border-radius: 20px;
+    background: none;
+    color: #36e2ec;
+    cursor: pointer;
+    transition: .3s linear;
+    margin-top: 20px;
+}
+
+.dialog .checkbox form .addToPlaylistBtn:hover {
+    border: 2px solid #36e2ec;
+    background: #36e2ec;
+    color: #fff;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* ------------------------------Dialog update playlist---------------------- */
+
+.dialog .button {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.dialog form .updatePlaylistBtn {
+    width: 130px;
+    height: 30px;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 20px;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    transition: .3s linear;
+    margin-top: 20px;
+}
+
+.dialog form .updatePlaylistBtn:hover {
+    border: 2px solid #fff;
+    background: #fff;
+    color: #000;
+}
+
+.inputBox {
+    position: relative;
+    width: 250px;
+    margin-top: 20px;
+}
+
+.inputBox input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    outline: none;
+    color: #fff;
+    font-size: 1em;
+}
+
+.inputBox span {
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 1em;
+    color: #fff;
+    transition: 0.5s;
+}
+
+.inputBox input:valid~span,
+.inputBox input:focus~span {
+    color: #36e2ec;
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.65em;
+    padding: 0 10px;
+    background: #111727;
+    border-left: 1px solid #36e2ec;
+    border-right: 1px solid #36e2ec;
+    letter-spacing: 0.2em;
+}
+
+.inputBox input:valid,
+.inputBox input:focus {
+    border: 1px solid #36e2ec;
+}
+
+/* ------------------------------Dialog create playlist---------------------- */
+
+.dialog form .createNewPlaylistDialogBtn {
+    width: 130px;
+    height: 30px;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 20px;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    transition: .3s linear;
+    margin-top: 20px;
+}
+
+.dialog form .createNewPlaylistDialogBtn:hover {
+    border: 2px solid #fff;
+    background: #fff;
+    color: #000;
+}

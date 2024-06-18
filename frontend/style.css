@@ -1,0 +1,501 @@
+* {
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    background-color: black;
+    color: #fff;
+    overflow: hidden;
+}
+
+.main {
+    display: flex;
+    height: 100vh;
+    padding: 0.5rem;
+}
+
+.sidebar {
+    background-color: #000;
+    width: 350px;
+    margin-right: 0.5rem;
+}
+
+.main-content {
+    background-color: #121212;
+    border-radius: 1rem;
+    flex: 1;
+    overflow: auto;
+    padding: 0 1.5rem 0 1.5rem;
+}
+
+.music-player {
+    background-color: black;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 72px;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav {
+    background-color: #121212;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100px;
+    padding: 0.5rem 0.75rem;
+}
+
+.nav-option {
+    line-height: 40px;
+    opacity: 0.7;
+    padding: 0.5rem 0.75rem;
+}
+
+.nav-option:hover {
+    opacity: 1;
+}
+
+.nav-option i {
+    font-size: 1.25rem;
+}
+
+.nav-option a {
+    font-size: 1rem;
+    margin-left: 1rem;
+}
+
+.library {
+    background-color: #121212;
+    border-radius: 1rem;
+    height: 100%;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lib-option img {
+    height: 1.25rem;
+    width: 1.25rem;
+}
+
+.icons {
+    font-size: 1.25rem;
+    display: flex;
+}
+
+.icons i {
+    opacity: 0.7;
+    margin-right: 1rem;
+}
+
+.icons i:hover {
+    opacity: 1;
+}
+
+.box {
+    background-color: #232323;
+    height: 8rem;
+    border-radius: 0.75rem;
+    margin: 0.75rem 0 1.75rem 0;
+    padding: 0.5rem 1.5rem;
+}
+
+.box-p1 {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.box-p2 {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.badge {
+    background-color: #fff;
+    border: none;
+    border-radius: 100px;
+    padding: 0.25rem 1rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    height: 2rem;
+    width: fit-content;
+}
+
+.createNewPlaylistBtn {
+    margin-top: 20px;
+}
+
+.dark-badge {
+    background-color: #000;
+    color: #fff;
+}
+
+.sticky-nav {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background-color: #121212;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    z-index: 10;
+}
+
+.sticky-nav-icons {
+    display: flex;
+    align-items: center;
+}
+
+.sticky-nav-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-item {
+    margin-right: 1rem;
+}
+
+@media (max-width: 1000px) {
+    .hide {
+        display: none;
+    }
+}
+
+.card {
+    background-color: #232323;
+    width: 150px;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+    color: #fff;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+    transition: .5s linear;
+}
+
+.card:hover {
+    background-color: #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.card {
+    position: relative;
+    width: 150px;
+}
+
+.card-img {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+}
+
+.card img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.icon-overlay {
+    position: absolute;
+    top: 65%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    color: #1ed760;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+    cursor: pointer;
+}
+
+.card:hover .icon-overlay {
+    opacity: 1;
+}
+
+.card-title,
+.card-info {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-title {
+    font-weight: 600;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+.card-title::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 5px;
+    transform: translateX(-75%);
+    background-color: #333;
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none; 
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.card-title:hover::after {
+    opacity: 1;
+}
+
+.card-info {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-top: 0.25rem;
+}
+
+.top-card-title {
+    width: 100%;
+    background-color: #121212;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    margin-top: 30px;
+}
+
+.top-card-title p {
+    cursor: pointer;
+}
+
+.footer {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line {
+    width: 100%;
+    height: 50%;
+    border-top: 1px solid white;
+    opacity: 0.4;
+}
+
+.music-player {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.album {
+    width: 25%;
+}
+
+.player {
+    width: 50%;
+}
+
+.controls {
+    width: 25%;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-control-icon {
+    height: 1rem;
+    margin-right: 1.75rem;
+    opacity: 0.8;
+}
+
+.player-control-icon:hover {
+    opacity: 1;
+}
+
+.playback-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-bar {
+    width: 70%;
+    appearance: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.progress-bar::-webkit-slider-runnable-track {
+    background-color: #ddd;
+    border-radius: 100px;
+    height: 0.2rem;
+}
+
+.progress-bar::-webkit-slider-thumb {
+    appearance: none;
+    height: 1rem;
+    width: 1rem;
+    background-color: #1bd760;
+    border-radius: 50%;
+    margin-top: -6px;
+}
+
+.album-control {
+    display: flex;
+}
+
+.album-icons {
+    display: flex;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4rem;
+    margin-top: 1.75rem;
+}
+
+.album-cast {
+    height: 2rem;
+    
+}
+.album-img {
+    display: flex;
+    padding-right: 1rem;
+    overflow: hidden; /* Ensures the image does not overflow the container */
+    width: 70px; /* Set a fixed width for the image container */
+    height: 70px; /* Set a fixed height for the image container */
+
+}
+
+.album-image {
+    width: 100%; /* Image will fill the container */
+    height: 100%; /* Image will fill the container */
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+    object-position: center; /* Centers the image */
+}
+.album-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px; /* Adjust as needed */
+}
+
+.album-song, .album-author {
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Ensures text overflow is hidden */
+    text-overflow: ellipsis; /* Adds ellipsis for overflowing text */
+    max-width: 200px; /* Adjust to your layout */
+}
+
+.album-song {
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.album-author {
+    font-size: 0.75rem;
+    margin-right: 50%;
+}
+
+.album-icons {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.album-like {
+    height: 2rem;
+}
+
+.album-cast {
+    height: 2rem;
+    margin-left: 1.75rem;
+}
+
+
+.control-icon {
+    height: 2rem;
+    padding-right: 1rem;
+}
+
+.control-bar {
+    width: 70%;
+    appearance: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.control-bar::-webkit-slider-runnable-track {
+    background-color: #ddd;
+    border-radius: 100px;
+    height: 0.2rem;
+    margin: 0 2rem;
+}
+
+.control-bar::-webkit-slider-thumb {
+    appearance: none;
+    height: 1rem;
+    width: 1rem;
+    background-color: blue;
+    border-radius: 50%;
+    margin-top: -6px;
+}
+
+.main-content .section {
+    display: none; /* Ẩn tất cả các phần */
+}
+
+.main-content .section.active {
+    display: block; /* Chỉ hiển thị phần có lớp "active" */
+}
+
+.main-content .none_active {
+    display: none;
+}
+
+
+/* Add these styles to your CSS file */
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+button.active {
+    color: lightblue;
+}
+
+button.inactive {
+    color: white;
+}
+

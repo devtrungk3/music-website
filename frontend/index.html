@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify - Web Player: Music for everyone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Explora&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="icon" href="./assets/logo.png"> -->
+
+
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="song_list.css">
+    <link rel="stylesheet" href="song_detail.css">
+    <link rel="stylesheet" href="song_search.css">
+    <link rel="stylesheet" href="dialog.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="sidebar">
+            <div class="nav">
+                <div id="home" class="nav-option" style="opacity: 1;">
+                    <i class="fa-solid fa-house"></i>
+                    <a href="#">Home</a>
+                </div>
+                <div id="search" class="nav-option">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <a href="#">Search</a>
+                </div>
+
+            </div>
+            <div id="library" class="library">
+                <div class="options">
+                    <div class="lib-option nav-option ">
+                        <img src="./assets/library_icon.png" alt="">
+                        <a href="#">Your Library</a>
+                    </div>
+                    <div class="icons">
+                        <i class="fa-solid fa-plus"></i>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+
+                </div>
+                <div class="lib-box">
+                    <div class="box">
+                        <p class="box-p1 ">Create your first playlist</p>
+                        <p class="box-p2">Save the songs to your other playlists</p>
+                        <button class="badge createNewPlaylistBtn">Create Playlist</button>
+                    </div>
+                    <!-- <div class="box">
+                        <p class="box-p1">Let's fing some podcasts to follow</p>
+                        <p class="box-p2">We'll keep you updated on new episodes</p>
+                        <button class="badge">Browse podcasts</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="sticky-nav">
+                <div class="sticky-nav-icons">
+                    <img src="./assets/backward_icon.png" alt="">
+                    <img src="./assets/forward_icon.png" class="hide" alt="">
+                    <div class="sticky_nav_search none_active">
+                        <i class="bi bi-search"></i>
+                        <input type="text" placeholder="Search Music..." id="searchInput">
+                    </div>
+                </div>
+                <div class="sticky-nav-options">
+                    <button id="userFullName" class="badge nav-item hide">Explore Premium</button>
+                    <button class="badge nav-item dark-badge"><i class="fa-regular fa-circle-down"
+                            style="margin-right: 8px;"></i>Install App</button>
+                    <i id="btnSignout" class="fa-regular fa-user nav-item"></i>
+                </div>
+            </div>
+
+            <div class="discover_container">
+                <div id="homeContent" class="section active">
+                    <div class="top-card-title">
+                        <h2>Recently Played</h2>
+                        <p id="showAllHistory">Show All</p>
+                    </div>
+                    <div id="songHistory" class="cards-container">
+                        <!-- <div class="card">
+                            <img src="./assets/card1img.jpg" class="card-img">
+                            <i class="bi bi-play-circle-fill icon-overlay"></i>
+                            <p class="card-title">Top 50 Global</p>
+                            <p class="card-info">Your daily update of the most played ...</p>
+                        </div> -->
+                    </div>
+
+
+                    <div class="top-card-title">
+                        <h2>Made For You</h2>
+                        <p id="showAllForYou">Show All</p>
+                    </div>
+                    <div id="forYouContainer" class="cards-container">
+                        <!-- <div class="card">
+                            <img src="./assets/card2img.jpg" class="card-img">
+                            <i class="bi bi-play-circle-fill icon-overlay"></i>
+                            <p class="card-title">Top 50 Global</p>
+                            <p class="card-info">Your daily update of the most played ...</p>
+                        </div> -->
+                    </div>
+
+                    <div class="top-card-title">
+                        <h2>Vietnamese artists</h2>
+                        <!-- <p id="showAllVietnameseArtist">Show All</p> -->
+                    </div>
+                    <div id="listArtist" class="cards-container">
+                        <!-- <div class="card">
+                            <img src="./assets/card1img.jpg" class="card-img">
+                            <i class="bi bi-play-circle-fill icon-overlay"></i>
+                            <p class="card-title">Top 50 Global</p>
+                            <p class="card-info">Your daily update of the most played ...</p>
+                        </div> -->
+                    </div>
+
+                    <div class="top-card-title">
+                        <h2>Popular Genre</h2>
+                        <!-- <p id="showAllPopularGenre">Show All</p> -->
+                    </div>
+                    <div id="listGenre" class="cards-container">
+                        <!-- <div class="card">
+                            <img src="./assets/card1img.jpg" class="card-img">
+                            <i class="bi bi-play-circle-fill icon-overlay"></i>
+                            <p class="card-title">Top 50 Global</p>
+                            <p class="card-info">Your daily update of the most played ...</p>
+                        </div> -->
+                    </div>
+
+
+                    <div class="top-card-title">
+                        <h2>May Be You Would Like</h2>
+                        <p id="showAllYouLike">Show All</p>
+                    </div>
+                    <div id="maybeLikeContainer" class="cards-container">
+                        <!-- <div class="card">
+                            <img src="./assets/card2img.jpg" class="card-img">
+                            <i class="bi bi-play-circle-fill icon-overlay"></i>
+                            <p class="card-title">Top 50 Global</p>
+                            <p class="card-info">Your daily update of the most played ...</p>
+                        </div> -->
+                    </div>
+
+                    <h2>Featured Charts</h2>
+                    <div class="cards-container">
+                        <div class="card">
+                            <img src="./assets/card5img.jpg" class="card-img">
+                            <p class="card-title">Top Songs- Global</p>
+                            <p class="card-info">Your daily update of the most played ...</p>
+                        </div>
+                        <div class="card">
+                            <img src="./assets/card6img.jpg" class="card-img">
+                            <p class="card-title">Top Songs - India</p>
+                            <p class="card-info">Your daily update of the most played ...</p>
+                        </div>
+                        <div class="card">
+                            <img src="./assets/card1img.jpg" class="card-img">
+                            <p class="card-title">Top 50 Global</p>
+                            <p class="card-info">Your daily update of the most played ...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- -----------------Hiển thị list nhạc trong playlist------------ -->
+            <div id="songListContent" class="song_list_content section">
+                <div class="song_playlist_header">
+                    <h2 id="detailListTitle">List Of Songs</h2>
+                    <button id="updatePlaylist" class="updatePlaylistBtn">Update Playlist</button>
+                    <button id="removePlaylist" class="updatePlaylistBtn">Remove Playlist</button>
+                </div>
+                <div class="list_song" id="songList">
+                    <!-- <li class="songItem">
+                        <span>01</span>
+                        <img src="img-song.png" alt="Alan">
+                        <h5>
+                            On My Way
+                            <div class="subtitle">Alan Walker</div>
+                        </h5>
+                        <div class="icons">
+                            <i class="bi playListPlay bi-play-circle-fill"></i>
+                            <i class="bi bi-heart"></i>
+                            <i class="bi bi-music-note-list"></i>
+                        </div>
+                    </li> -->
+                </div>
+            </div>
+
+            <!-- ----------------------Hiển thị chi tiết bài hát--------------- -->
+            <div id="songDetailContent" class="song_detail_container section">
+                <h2>Song Detail</h2>
+                <div class="song_detail">
+                    <img id="songImage" class="song_img" src="./assets/img-song.png" alt="">
+                    <div class="song_info">
+                        <h1 id="songTitle" class="song_title">Name song</h1>
+                        <div class="subtitle">
+                            <img id="artistImage" class="artistImage" src="./assets/img-artist.png" alt="">
+                            <p id="songArtist"></p>
+                            <p id="songReleasedYear"></p>
+                            <p id="songGenre"></p>
+                        </div>
+                        <div class="song_icons">
+                            <i class="bi playListPlay bi-play-circle-fill" style="color: lightgreen;"></i>
+                            <i id="heartIcon" class="bi bi-heart"></i>
+                            <i class="bi bi-music-note-list"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- -----------------------Hiển thị trang search------------------- -->
+            <div id="searchContent" class="search_content section">
+                <div class="search_song" id="songSearch">
+                    <!-- <li class="songItem">
+                        <span>01</span>
+                        <img src="img-song.png" alt="Alan">
+                        <h5>
+                            On My Way
+                            <div class="subtitle">Alan Walker</div>
+                        </h5>
+                        <div class="icons"></div>
+                    </li> -->
+                </div>
+            </div>
+
+
+            <div id="libraryContent" class="section">
+                <h2> Your Favorite Songs</h2>
+                <div id="favoriteContainer" class="cards-container">
+                    <!-- <div class="card">
+                    <img src="./assets/card1img.jpg" class="card-img">
+                    <p class="card-title">Top 50 Global</p>
+                    <p class="card-info">Your daily update of the most played ...</p>
+                </div> -->
+                </div>
+
+                <h2 style="margin-top: 10px;"> Your Playlist</h2>
+                <div id="playlistContainer" class="cards-container">
+                    <!-- <div class="card">
+                    <img src="./assets/card1img.jpg" class="card-img">
+                    <p class="card-title">Top 50 Global</p>
+                    <p class="card-info">Your daily update of the most played ...</p>
+                </div> -->
+                </div>
+
+                <h2 style="margin-top: 10px;">Featured Charts</h2>
+                <div class="cards-container">
+                    <div class="card">
+                        <img src="./assets/card5img.jpg" class="card-img">
+                        <p class="card-title">Top Songs- Global</p>
+                        <p class="card-info">Your daily update of the most played ...</p>
+                    </div>
+                    <div class="card">
+                        <img src="./assets/card6img.jpg" class="card-img">
+                        <p class="card-title">Top Songs - India</p>
+                        <p class="card-info">Your daily update of the most played ...</p>
+                    </div>
+                    <div class="card">
+                        <img src="./assets/card1img.jpg" class="card-img">
+                        <p class="card-title">Top 50 Global</p>
+                        <p class="card-info">Your daily update of the most played ...</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer">
+                <div class="line"></div>
+            </div>
+        </div>
+        <div class="music-player">
+            <div class="album">
+                <div class="album-control">
+                    <div class="album-img">
+                        <img id="songPlayBarImage" src="./assets/album_picture.jpg" alt="">
+                    </div>
+                    <div class="album-text">
+                        <p id="songPlayBarTitle" class="album-song">Daylight</p>
+                        <p id="songPlayBarArtist" class="album-author">DavidKushner</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="player">
+                <div class="player-controls">
+                    <img id="shuffleBtn" src="./assets/shuffle.png" class="player-control-icon">
+                    <img id="prevBtn" src="./assets/previous.png" class="player-control-icon">
+                    <img id="playPauseBtn" src="./assets/play.png" style="height: 2rem;" class="player-control-icon">
+                    <img id="nextBtn" src="./assets/next.png" class="player-control-icon">
+                    <img id="repeatBtn" src="./assets/repeat.png" class="player-control-icon">
+                </div>
+                <div class="playback-bar">
+                    <span id="currentTime" class="curr-time">00:00</span>
+                    <input id="progressBar" type="range" min="0" max="100" class="progress-bar" step="1">
+                    <span id="totalTime" class="total-time">3:33</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="player-controls">
+
+                    <img id="muteBtn" src="./assets/non-mute.png" class="control-icon">
+                    <img src="./assets/controls_icon5.png" style="height: 4rem; margin-left: 4rem;"
+                        class="control-icon">
+                    <input id="volumeBar" type="range" min="0" max="100" class="control-bar" step="1">
+                </div>
+            </div>
+        </div>
+        <audio id="audioPlayer"></audio>
+
+    </div>
+
+    <!-- Dialog add to playlist -->
+    <div id="addToPlaylistDialog" class="dialog">
+        <div class="dialog-content">
+            <h2>Add to Playlist</h2>
+            <div class="checkbox">
+                <form id="playlistForm" action="">
+                    <div id="playlistRange"></div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Dialog update plailist -->
+    <div id="updatePlaylistDialog" class="dialog">
+        <div class="dialog-content">
+            <span class="close">&times;</span>
+            <h2>Update Playlist</h2>
+            <form id="updatePlaylistForm">
+                <div class="inputBox">
+                    <input id="new_Title_Playlist" name="new_Title_Playlist" type="text" required="required">
+                    <span>Title</span>
+                </div>
+                <div class="inputBox">
+                    <input id="new_Description_Playlist" name="new_Description_Playlist" type="text"
+                        required="required">
+                    <span>Description</span>
+                </div>
+                <div class="button">
+                    <input class="updatePlaylistBtn" type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dialog create new plailist -->
+    <div id="createNewPlaylistDialog" class="dialog">
+        <div class="dialog-content">
+            <h2>Create Playlist</h2>
+            <form id="createPlaylistForm">
+                <div class="inputBox">
+                    <input id="title_Playlist" name="title_Playlist" type="text" required="required">
+                    <span>Title</span>
+                </div>
+                <div class="inputBox">
+                    <input id="description_Playlist" name="description_Playlist" type="text" required="required">
+                    <span>Description</span>
+                </div>
+                <div class="button">
+                    <input class="createNewPlaylistDialogBtn" type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script/authentication.js"></script>
+    <script src="app.js"></script>
+    <script src="script/animation.js"></script>
+    <script src="script/playlist.js"></script>
+    <script src="script/artist.js"></script>
+    <script src="script/recommend.js"></script>
+    <script src="script/history.js"></script>
+    <script src="script/favorite.js"></script>
+    <script src="script/genre.js"></script>
+    <script src="script/search.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Music Website Sign In</title>
+    <link rel="stylesheet" href="authentication.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="left_bx1">
+            <div class="content">
+                <form id="loginForm" method="POST">
+                    <h3>Sign In</h3>
+                    <div class="card">
+                        <label for="name">Name</label>
+                        <input type="text" id="user_name" name="user_name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="card">
+                        <label for="password">Password</label>
+                        <input type="password" id="user_password" name="user_password" placeholder="Enter your password" required>
+                    </div>
+                    <input type="submit" value="Sign In" class="submit">
+                    <div class="check">
+                        <input type="checkbox" id="rememberMe"> <span>Remember Me</span>
+                    </div>
+                    <p>You haven't had an account? <a href="signup.html">Sign up</a></p>
+                </form>
+            </div>
+        </div>
+        <div class="right_bx1">
+            <img src="login_png.jpg" alt="">
+        </div>
+    </header>
+
+    <script src="script/signin.js"></script>
+    <script src="script/authentication.js"></script>
+</body>
+
+</html>
