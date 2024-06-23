@@ -6,7 +6,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 from sqlalchemy import create_engine
 
-engine = create_engine('mysql+mysqlconnector://root:@localhost/music_server')
+password = ''
+engine = create_engine(f'mysql+pymysql://root:{password}@localhost/music_server')
 app = Flask(__name__)
 CORS(app, origins=['http://localhost:3000'])
 

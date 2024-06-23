@@ -1,5 +1,5 @@
 import pandas as pd
-import mysql.connector
+import pymysql
 import time, random
 
 db_host = "localhost"
@@ -7,12 +7,12 @@ db_name = "music_server"
 db_user = "root"
 db_password = ""
 
-df = pd.read_csv("C:/Users/HP/Desktop/ratings.csv")
+# df = pd.read_csv("C:/Users/HP/Desktop/ratings.csv")
 
 try:
-    connection = mysql.connector.connect(host=db_host, database=db_name, user=db_user, password=db_password)
+    connection = pymysql.connect(host=db_host, database=db_name, user=db_user, password=db_password)
     cursor = connection.cursor()
-except mysql.connector.Error as err:
+except pymysql.Error as err:
     print("Error connecting to database:", err)
     exit()
     
